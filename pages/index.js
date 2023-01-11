@@ -1,17 +1,20 @@
 import Head from "next/head";
 import Image from "next/image";
+import { Libre_Baskerville } from "@next/font/google";
 import styles from "../styles/Home.module.css";
-import { getPosts } from "../utils/posts";
+import { getPosts } from "../lib/posts";
 
 export async function getStaticProps({ params }) {
-  const { skip } = params;
+  const skip = params?.skip;
   const posts = await getPosts({ limit: 10, skip });
   return { props: { posts } };
 }
 
-export default function Home() {
+const libreBaskerville = Libre_Baskerville({ weight: "400", subsets: "latin" });
+
+export default function Home({ posts }) {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${libreBaskerville.className}`}>
       <Head>
         <title>Coyote canyon</title>
         <meta name="description" content="Sam Ritter's writing" />
@@ -19,9 +22,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        {posts.map((post) => (
+          <div key={post.title}>{post.title}</div>
+        ))}
       </main>
 
       <footer className={styles.footer}>
