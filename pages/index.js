@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Libre_Baskerville } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import { getPosts } from "../lib/posts";
+import Link from "next/link";
 
 export async function getStaticProps({ params }) {
   const skip = params?.skip;
@@ -22,9 +23,13 @@ export default function Home({ posts }) {
       </Head>
 
       <main className={styles.main}>
-        {posts.map((post) => (
-          <div key={post.title}>{post.title}</div>
-        ))}
+        <ul>
+          {posts.map((post) => (
+            <li key={post.title}>
+              <Link href={`/post/${post.sys.id}`}>{post.title}</Link>
+            </li>
+          ))}
+        </ul>
       </main>
 
       <footer className={styles.footer}>
