@@ -1,5 +1,7 @@
 .header {
   font-size: 32px;
+  margin-bottom: 40px;
+  font-weight: bold;
 }
 
 .postList {

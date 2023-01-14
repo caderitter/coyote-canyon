@@ -13,7 +13,17 @@ a {
   box-sizing: border-box;
 }
 
+main {
+  display: flex;
+  justify-content: center;
+}
+
 .container {
   padding: 10%;
-  max-width: 800px;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 1000px;
+  }
 }
